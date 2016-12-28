@@ -2,12 +2,16 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var globalCSS = new ExtractTextPlugin('assets/styles/global.css');
 
+var testing = process.env.NODE_ENV === 'testing' || false;
+
 module.exports = {
-    entry: [
-        './src/index.jsx',
-        './src/index.html',
-        './src/styles/global.scss',
-    ],
+    entry: {
+        app: [
+            './src/index.jsx',
+            './src/index.html',
+            './src/styles/global.scss',
+        ]
+    },
     plugins: [
         globalCSS
     ],
@@ -25,7 +29,7 @@ module.exports = {
             {
                 test: /\.(scss)$/,
                 exclude: /global.scss/,
-                loaders: [
+                loaders: testing ? ['null'] : [
                     'style',
                     'css?modules&importLoaders=2&localIdentName=[name]__[local]___[hash:base64:10]',
                     'resolve-url',
@@ -34,7 +38,7 @@ module.exports = {
             },
             {
                 test: /global.scss/,
-                loader: globalCSS.extract(['css', 'sass'])
+                loader: testing ? 'null' : globalCSS.extract(['css','sass'])
             },
             {
                 test: /\.(gif|png|svg)$/,
