@@ -3,7 +3,7 @@ import cssModules from 'react-css-modules';
 
 import styles from './LeftSidebar.container.scss';
 
-const LeftSidebar = props => (
+const LeftSidebar = () => (
     <div>
         Left Sidebar
     </div>
