@@ -10,17 +10,17 @@ module.exports = {
             './src/index.jsx',
             './src/index.html',
             './src/styles/global.scss',
-        ]
+        ],
     },
     plugins: [
-        globalCSS
+        globalCSS,
     ],
     module: {
         loaders: [
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                loader: 'babel'
+                loader: 'babel',
             },
             {
                 test: /\.html$/,
@@ -33,33 +33,33 @@ module.exports = {
                     'style',
                     'css?modules&importLoaders=2&localIdentName=[name]__[local]___[hash:base64:10]',
                     'resolve-url',
-                    'sass'
-                ]
+                    'sass',
+                ],
             },
             {
                 test: /global.scss/,
-                loader: testing ? 'null' : globalCSS.extract(['css','sass'])
+                loader: testing ? 'null' : globalCSS.extract(['css', 'sass']),
             },
             {
                 test: /\.(gif|png|svg)$/,
-                loader: 'url-loader?mimetype=image/png&limit=10000&name=/assets/images/[name]-[hash].[ext]'
+                loader: 'url-loader?mimetype=image/png&limit=10000&name=/assets/images/[name]-[hash].[ext]',
             },
             {
                 test: /\.json$/,
-                loader: 'json-loader'
-            }
-        ]
+                loader: 'json-loader',
+            },
+        ],
     },
     sassLoader: {
-        includePaths: [path.join(__dirname, 'src', 'styles')]
+        includePaths: [path.join(__dirname, 'src', 'styles')],
     },
     resolve: {
         root: path.resolve('./src/'),
-        extensions: ['', '.js', '.jsx', '.scss']
+        extensions: ['', '.js', '.jsx', '.scss'],
     },
     output: {
         path: __dirname + '/dist',
         publicPath: '',
-        filename: 'bundle.js'
-    }
+        filename: 'bundle.js',
+    },
 };
